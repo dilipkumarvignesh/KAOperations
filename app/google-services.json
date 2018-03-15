@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1019738859670",
+    "firebase_url": "https://krishnaamrita-70cef.firebaseio.com",
+    "project_id": "krishnaamrita-70cef",
+    "storage_bucket": "krishnaamrita-70cef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019738859670:android:a81d77810829fc15",
+        "android_client_info": {
+          "package_name": "iskconbangalore.org.kaoperations"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019738859670-pqjgm2595aplpqgr1tf5gujsh86tkssk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iskconbangalore.org.kaoperations",
+            "certificate_hash": "f3599cedd53511d9d2000e3a57d050ff33b97ff3"
+          }
+        },
+        {
+          "client_id": "1019738859670-3noqtv89if8htggarucoct5ojed0t7pd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvP04uT8fWgDt-ETqpxxjEZ7EzTsL9sV8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019738859670-3noqtv89if8htggarucoct5ojed0t7pd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

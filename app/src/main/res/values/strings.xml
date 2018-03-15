@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">KAOperations</string>
+
+    <string-array name="Residencies">
+        <item>Residency</item>
+        <item>ITPL FR</item>
+        <item>Marathahalli FR</item>
+        <item>ECITY FR</item>
+        <item>KS Layout FR</item>
+        <item>RV FR</item>
+        <item>JSS FR</item>
+        <item>Kormangala FR</item>
+        <item>BTM FR</item>
+        <item>Ramaiah FR</item>
+        <item>Rajaji Nagar FR</item>
+    </string-array>
+    <string-array name="Time">
+        <item>morning</item>
+        <item>evening</item>
+    </string-array>
+</resources>
