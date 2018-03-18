@@ -6,54 +6,116 @@
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
-    <Spinner
-        android:id="@+id/ResidencySpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:entries="@array/Residencies"
-        android:background="@android:drawable/spinner_background"
-        />
-    <Spinner
-        android:id="@+id/TimeSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:entries="@array/Time"
-        android:background="@android:drawable/spinner_background"
-        />
-    <Button
-        android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Update Time"></Button>
-    <EditText
-        android:id="@+id/Feedback"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:hint="Give your feedback"
-        android:inputType="text"/>
-    <Button
-        android:id="@+id/updateFeedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Update Feedback"></Button>
 
-    <Button
-        android:id="@+id/Rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Rating"></Button>
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/menu_card"
+        android:layout_gravity="center"
+        android:onClick="navigateMenu"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/selector"
+        card_view:cardCornerRadius="10dp">
 
-    <Button
-        android:id="@+id/Report"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Report"></Button>
+        <TextView
+            android:id="@+id/menu_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="50dp"
+            android:text="Menu"
+            android:gravity="center"
+            android:background="@color/fui_buttonShadow"
+
+            />
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/feedback_Card"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:onClick="navigateFeedback"
+        card_view:cardCornerRadius="10dp">
+
+        <TextView
+            android:id="@+id/feedback_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="50dp"
+            android:text="Feedback"
+            android:gravity="center"
+            android:background="@color/fui_buttonShadow"
+            />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/admin_Card"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:onClick="navigateAdmin"
+
+        card_view:cardCornerRadius="10dp">
+
+        <TextView
+            android:id="@+id/admin_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="50dp"
+            android:text="Admin"
+            android:gravity="center"
+            android:background="@color/fui_buttonShadow"
+            />
+    </android.support.v7.widget.CardView>
+    <!--<Spinner-->
+        <!--android:id="@+id/ResidencySpinner"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:entries="@array/Residencies"-->
+        <!--android:background="@android:drawable/spinner_background"-->
+        <!--/>-->
+    <!--<Spinner-->
+        <!--android:id="@+id/TimeSpinner"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:entries="@array/Time"-->
+        <!--android:background="@android:drawable/spinner_background"-->
+        <!--/>-->
+    <!--<Button-->
+        <!--android:id="@+id/update"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:text="Update Time"></Button>-->
+    <!--<EditText-->
+        <!--android:id="@+id/Feedback"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:hint="Give your feedback"-->
+        <!--android:inputType="text"/>-->
+    <!--<Button-->
+        <!--android:id="@+id/updateFeedback"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:text="Update Feedback"></Button>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/Rating"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:text="Rating"></Button>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/Report"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:text="Report"></Button>-->
 
 
 </LinearLayout>

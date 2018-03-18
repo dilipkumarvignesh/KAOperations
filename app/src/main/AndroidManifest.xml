@@ -19,7 +19,9 @@
         <activity android:name=".Report" />
         <activity android:name=".Rating" />
         <activity android:name=".SignInfo" />
-        <activity android:name=".MenuUpdate"></activity>
+        <activity android:name=".MenuUpdate" />
+        <activity android:name=".Feedback" />
+        <activity android:name=".MenuDisplay"></activity>
     </application>
 
 </manifest>

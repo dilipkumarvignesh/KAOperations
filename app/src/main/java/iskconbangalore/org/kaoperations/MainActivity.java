@@ -1,28 +1,34 @@
 package iskconbangalore.org.kaoperations;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     Button update,updateFeedback,report,rating;
     private static final int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
     private String name,email;
+    DatabaseReference root;
     ArrayList<String> ResidencyNames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-
+        root = FirebaseDatabase.getInstance().getReference();
 // ...
 
 // ..Choose authentication providers
@@ -58,15 +64,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             Log.d("info","User is null");
         }
+
+        verifySignIn();
         ResidencyNames=new ArrayList<>();
-        update =(Button)findViewById(R.id.update);
-        report = (Button)findViewById(R.id.Report);
-        rating= (Button)findViewById(R.id.Rating);
-        update.setOnClickListener(this);
-        updateFeedback = (Button)findViewById(R.id.updateFeedback);
-        updateFeedback.setOnClickListener(this);
-        report.setOnClickListener(this);
-        rating.setOnClickListener(this);
+//        update =(Button)findViewById(R.id.update);
+//        report = (Button)findViewById(R.id.Report);
+//        rating= (Button)findViewById(R.id.Rating);
+//        update.setOnClickListener(this);
+//        updateFeedback = (Button)findViewById(R.id.updateFeedback);
+//        updateFeedback.setOnClickListener(this);
+//        report.setOnClickListener(this);
+//        rating.setOnClickListener(this);
 
 //        update.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -76,6 +84,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
 //        });
 
+    }
+    public void verifySignIn()
+    {
+        DatabaseReference userNameRef = root.child("users").child(name).child("Name");
+        final Context con = this;
+        userNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.d("info","dataSnapValue:"+dataSnapshot.getValue());
+                //    Log.d("info","Datasnapshot:"+dataSnapshot.getChildren());
+                if(!dataSnapshot.exists())
+                {
+                    Intent k = new Intent(getApplicationContext(),SignInfo.class);
+                    k.putExtra("name",name);
+                    startActivity(k);
+                }
+                else
+                {
+                    Toast.makeText(con,"Already updated for today",Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
     }
     @Override
     public void onStart() {
@@ -101,56 +138,76 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-    public void onClick(View v) {
-        Log.d("info", "Button clicked:" + v.getId());
-        switch (v.getId()) {
-
-            case R.id.update: {
-                updateResponse();
-                break;
-            }
-            case R.id.updateFeedback: {
-
-                updateFeedback();
-                break;
-            }
-            case R.id.Report:{
-//                Intent k = new Intent(getApplicationContext(),SignInfo.class);
-//                Intent k = new Intent(getApplicationContext(),Report.class);
+//    public void onClick(View v) {
+//        Log.d("info", "Button clicked:" + v.getId());
+//        switch (v.getId()) {
+//
+//            case R.id.update: {
+//                updateResponse();
+//                break;
+//            }
+//            case R.id.updateFeedback: {
+//
+//                updateFeedback();
+//                break;
+//            }
+//            case R.id.Report:{
+////                Intent k = new Intent(getApplicationContext(),SignInfo.class);
+////                Intent k = new Intent(getApplicationContext(),Report.class);
+////                k.putExtra("name",name);
+////                k.putExtra("email",email);
+////                startActivity(k);
+////                Intent k = new Intent(getApplicationContext(),MenuUpdate.class);
+////                startActivity(k);
+//
+//                Intent k = new Intent(getApplicationContext(),Feedback.class);
+//                startActivity(k);
+//                break;
+//            }
+//            case R.id.Rating:{
+//                Intent k = new Intent(getApplicationContext(),Rating.class);
 //                k.putExtra("name",name);
 //                k.putExtra("email",email);
 //                startActivity(k);
-                Intent k = new Intent(getApplicationContext(),MenuUpdate.class);
-                startActivity(k);
-                break;
-            }
-            case R.id.Rating:{
-                Intent k = new Intent(getApplicationContext(),Rating.class);
-                k.putExtra("name",name);
-                k.putExtra("email",email);
-                startActivity(k);
-            }
-        }
-    }
-    public void updateResponse()
+//            }
+//        }
+//    }
+//    public void updateResponse()
+//    {
+//        Spinner residency = (Spinner) findViewById(R.id.ResidencySpinner);
+//        Spinner Time = (Spinner) findViewById(R.id.TimeSpinner);
+//        String residencyValue = residency.getSelectedItem().toString();
+//        String TimeValue = Time.getSelectedItem().toString();
+//        EditText feedback = (EditText)findViewById(R.id.Feedback);
+//        dbOperations.writeTimeUpdate(residencyValue,TimeValue);
+//
+//
+//
+//    }
+//    public void updateFeedback()
+//    {
+//        Spinner residency = (Spinner) findViewById(R.id.ResidencySpinner);
+//        Spinner Time = (Spinner) findViewById(R.id.TimeSpinner);
+//        String residencyValue = residency.getSelectedItem().toString();
+//        String TimeValue = Time.getSelectedItem().toString();
+//        EditText feedback = (EditText)findViewById(R.id.Feedback);
+//        dbOperations.writeFeedbackUpdate(residencyValue,TimeValue,feedback.getText().toString());
+//    }
+
+    public void navigateMenu(View view)
     {
-        Spinner residency = (Spinner) findViewById(R.id.ResidencySpinner);
-        Spinner Time = (Spinner) findViewById(R.id.TimeSpinner);
-        String residencyValue = residency.getSelectedItem().toString();
-        String TimeValue = Time.getSelectedItem().toString();
-        EditText feedback = (EditText)findViewById(R.id.Feedback);
-        dbOperations.writeTimeUpdate(residencyValue,TimeValue);
-
-
 
     }
-    public void updateFeedback()
+
+    public void navigateFeedback(View view)
     {
-        Spinner residency = (Spinner) findViewById(R.id.ResidencySpinner);
-        Spinner Time = (Spinner) findViewById(R.id.TimeSpinner);
-        String residencyValue = residency.getSelectedItem().toString();
-        String TimeValue = Time.getSelectedItem().toString();
-        EditText feedback = (EditText)findViewById(R.id.Feedback);
-        dbOperations.writeFeedbackUpdate(residencyValue,TimeValue,feedback.getText().toString());
+        Intent k = new Intent(getApplicationContext(),Feedback.class);
+        startActivity(k);
+    }
+
+    public void navigateAdmin(View view)
+    {
+        Intent k = new Intent(getApplicationContext(),MenuUpdate.class);
+               startActivity(k);
     }
 }

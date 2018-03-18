@@ -26,17 +26,17 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <EditText android:id="@+id/input_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="Email" />
-    </android.support.design.widget.TextInputLayout>
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginBottom="8dp">-->
+        <!--<EditText android:id="@+id/input_email"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:inputType="textEmailAddress"-->
+            <!--android:hint="Email" />-->
+    <!--</android.support.design.widget.TextInputLayout>-->
 
 
         <android.support.design.widget.TextInputLayout
@@ -57,5 +57,40 @@
             android:layout_height="wrap_content"
             android:entries="@array/Residencies"
             />
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="2dp"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:id="@+id/radioGroup"
+            >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:text="Simple"
+                android:id="@+id/radioButton"
+                android:checked="false"
+                android:textSize="10dp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Special"
+                android:id="@+id/radioButton2"
+                android:checked="false"
+                android:textSize="10dp"
+                android:layout_weight="0.13" />
+        </RadioGroup>
+        <Button
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="updateDetails"
+            android:layout_gravity="center_horizontal"
+            android:text="Save" />
     </LinearLayout>
+
 </ScrollView>
