@@ -115,9 +115,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.Report:{
-                Intent k = new Intent(getApplicationContext(),Report.class);
-                k.putExtra("name",name);
-                k.putExtra("email",email);
+//                Intent k = new Intent(getApplicationContext(),SignInfo.class);
+//                Intent k = new Intent(getApplicationContext(),Report.class);
+//                k.putExtra("name",name);
+//                k.putExtra("email",email);
+//                startActivity(k);
+                Intent k = new Intent(getApplicationContext(),MenuUpdate.class);
                 startActivity(k);
                 break;
             }

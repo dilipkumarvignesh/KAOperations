@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".Report" />
         <activity android:name=".Rating" />
-        <activity android:name=".SignInfo"></activity>
+        <activity android:name=".SignInfo" />
+        <activity android:name=".MenuUpdate"></activity>
     </application>
 
 </manifest>

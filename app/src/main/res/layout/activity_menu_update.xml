@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        >
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="setDate"
+        android:text="Select Date" />
+        <TextView
+            android:id="@+id/selectedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="2dp"
+        android:weightSum="1"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup"
+      >
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:text="Simple"
+            android:id="@+id/radioButton"
+            android:checked="false"
+            android:textSize="10dp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Special"
+            android:id="@+id/radioButton2"
+            android:checked="false"
+            android:textSize="10dp"
+            android:layout_weight="0.13" />
+    </RadioGroup>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:drawableTint="#FF4081"
+            android:id="@+id/input_morning_prasadam"
+            android:singleLine="true"
+            android:hint="Breakfast Menu"
+            android:inputType="textEmailAddress" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:drawableTint="#FF4081"
+            android:id="@+id/input_lunch_prasadam"
+            android:singleLine="true"
+            android:hint="Lunch Menu"
+            android:inputType="textEmailAddress" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:drawableTint="#FF4081"
+            android:id="@+id/input_dinner_prasadam"
+            android:singleLine="true"
+            android:hint="Dinner Menu"
+            android:inputType="textEmailAddress" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/menuUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="setMenu"
+        android:layout_gravity="center_horizontal"
+        android:text="Save" />
+
+</LinearLayout>
