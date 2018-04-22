@@ -1,8 +1,12 @@
 package iskconbangalore.org.kaoperations;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -62,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            Log.d("info","User is null");
+          name="";
         }
 
-        verifySignIn();
+      //  verifySignIn();
         ResidencyNames=new ArrayList<>();
 //        update =(Button)findViewById(R.id.update);
 //        report = (Button)findViewById(R.id.Report);
@@ -83,8 +87,24 @@ public class MainActivity extends AppCompatActivity {
 //                updateResponse();
 //            }
 //        });
-
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED);
+        ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, 100);
     }
+//
+//    @Override
+//    public void onRequestPermissions(int requestCode, String[] permissions, int[] grantResults) {
+//        if (requestCode == 100) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                // Now user should be able to use camera
+//            }
+//            else {
+//                // Your app will not have this permission. Turn off all functions
+//                // that require this permission or it will force close like your
+//                // original question
+//            }
+//        }
+//    }
     public void verifySignIn()
     {
         DatabaseReference userNameRef = root.child("users").child(name).child("Name");
@@ -103,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(con,"Already updated for today",Toast.LENGTH_LONG).show();
+                    Toast.makeText(con,"Welcome Back "+ name,Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -131,6 +151,9 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                name = user.getDisplayName();
+                email = user.getEmail();
+                verifySignIn();
                 // ...
             } else {
                 // Sign in failed, check response for error code
@@ -196,7 +219,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void navigateMenu(View view)
     {
-
+        Intent k = new Intent(getApplicationContext(),MenuDisplay.class);
+        startActivity(k);
     }
 
     public void navigateFeedback(View view)
