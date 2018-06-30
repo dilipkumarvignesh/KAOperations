@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="vertical" android:layout_height="wrap_content">
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+        android:id="@+id/PrasadamName"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+
+        android:textSize="30dp"
+        android:textStyle="bold"
+        ></TextView>
+    <TextView
+        android:textStyle="bold"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:text="1) Quantity"
+    android:layout_marginLeft="10dp"
+        android:layout_marginTop ="10dp"
+        android:textSize="20dp"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/RadioQuantity">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="More"
+            android:layout_margin="10dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:text="Exact"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:text="Less"/>
+    </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="2) Quality"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop ="10dp"
+        android:textSize="20dp"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/RadioQuality">
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Good"
+
+        android:layout_margin="10dp"/>
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:text="Average"/>
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:text="Poor"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="3) Taste"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop ="10dp"
+        android:textSize="20dp"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/RadioFeedback">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oily"
+
+            android:layout_margin="10dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:text="Spicy"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:text="Salty"/>
+    </RadioGroup>
+    <!--<Button android:id="@+id/Button01"-->
+        <!--android:layout_width="wrap_content" android:layout_height="wrap_content"-->
+        <!--android:text="Cancel" />-->
+    <EditText android:id="@+id/textComments"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="20dp"
+        android:hint="Please enter Comments"
+
+        />
+</LinearLayout>

@@ -44,8 +44,7 @@ public class dbOperations {
         String toDate = UtilityFunctions.getDate();
         String time = UtilityFunctions.getTime();
         Log.d("info","TimeValue:"+time);
-        ResUpdate res = new ResUpdate();
-        res.residency=Residency;
+
         //res.updateTime=Time;
 
         DatabaseReference todayDateNode = FirebaseDatabase.getInstance().getReference(toDate);

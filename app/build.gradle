@@ -17,6 +17,12 @@ android {
         }
     }
 }
+repositories {
+    maven {
+        url "https://s3.amazonaws.com/repo.commonsware.com"
+    }
+}
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -31,7 +37,10 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:3.2.1'
     implementation 'com.github.florent37:expansionpanel:1.0.3'
     implementation 'com.google.firebase:firebase-storage:11.8.0'
+    implementation 'com.commonsware.cwac:merge:1.1.2'
     testImplementation 'junit:junit:4.12'
+
+
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
