@@ -7,6 +7,16 @@ public class Users {
     private String MenuType;
     private String Residency;
     private int Points;
+
+    public int getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(int admin) {
+        this.admin = admin;
+    }
+
+    private int admin;
     public int getPoints() {
         return Points;
     }
@@ -24,14 +34,16 @@ public class Users {
         this.MenuType="";
         this.Residency="";
         this.Points= 0;
+        this.admin = 0;
     }
-    public Users(String Name,String Number,String MenuType,String Residency,int points)
+    public Users(String Name,String Number,String MenuType,String Residency,int points,int admin)
     {
         this.Name = Name;
         this.Number = Number;
         this.MenuType = MenuType;
         this.Residency = Residency;
         this.Points = points;
+        this.admin = admin;
     }
     public String getName() {
         return Name;

@@ -82,15 +82,9 @@ public class MenuUpdate extends AppCompatActivity {
             };
 
     private void showDate(int year, int month, int day) {
-        String mon="";
-        if(month<10)
-        {
-            mon="0"+month;
-        }
-        else
-            mon = ""+month;
-        selectedDate.setText(new StringBuilder().append(year).append("-")
-                .append(mon).append("-").append(day));
+
+        String formattedDate = UtilityFunctions.getFormattedDate(year,month,day);
+        selectedDate.setText(formattedDate);
     }
 
     public void setMenu(View view)

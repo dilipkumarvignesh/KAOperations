@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.commonsware.cwac.merge.MergeAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,8 +35,8 @@ public class MenuFragment extends Fragment {
     private Calendar calendar;
     ListView listBreakfast,listLunch,listDinner;
     LayoutInflater layoutinflater;
-    private ArrayAdapter<String> arrayAdapter=null;
-    private MergeAdapter adapter=null;
+
+    private int admin=0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -51,25 +50,24 @@ public class MenuFragment extends Fragment {
 //        listDinner = view.findViewById(R.id.listDinner);
         layoutinflater = inflater;
 
-//        ArrayList items = new ArrayList();
-//
-//        //Add fake data to our list - notice unsorted order
-//        items.add(new ListCell("Apple", "Electronics"));
-//        items.add(new ListCell("BMW", "Cars"));
-//        items.add(new ListCell("Samsung", "Electronics"));
-//        items.add(new ListCell("Audi", "Cars"));
-//        items.add(new ListCell("Brazil", "Countries"));
-//        items.add(new ListCell("Sony", "Electronics"));
-//        items.add(new ListCell("Turkey", "Countries"));
-//        items.add(new ListCell("LG", "Electronics"));
-//        items.add(new ListCell("Denmark", "Countries"));
-//
-//
-//
-//        items = sortAndAddSections(items);
-//
-//        ListAdapter adapter = new ListAdapter(getActivity(), items);
-//        listBreakfast.setAdapter(adapter);
+        UtilityFunctions.getUserPoints(this.getActivity(),new firebaseCallBack() {
+
+            @Override
+            public void onCallback(Users user) {
+                Log.d("info","InterfacePointsValue:"+user.getPoints());
+                admin= user.getAdmin();
+                Log.d("info","admin Value:"+admin);
+                if(admin == 1)
+                {
+
+                    MenuUpdate.setVisibility(View.VISIBLE);
+                }
+            }
+
+
+        });
+
+
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -319,7 +317,7 @@ public class MenuFragment extends Fragment {
                                       int arg1, int arg2, int arg3) {
                     // TODO Auto-generated method stub
                     // arg1 = year
-                    // arg2 = month
+                    // arg2 = months
                     // arg3 = day
                     showDate(arg1, arg2+1, arg3);
                 }
@@ -331,8 +329,9 @@ public class MenuFragment extends Fragment {
             mon="0"+month;
         else
             mon=""+month;
-        selectedDate.setText(new StringBuilder().append(year).append("-")
-                .append(mon).append("-").append(day));
+
+        String formattedDate = UtilityFunctions.getFormattedDate(year,month,day);
+        selectedDate.setText(formattedDate);
         displayMenu();
     }
 

@@ -35,9 +35,9 @@ public class ProfileFragment extends Fragment {
         UtilityFunctions.getUserPoints(this.getActivity(), new firebaseCallBack() {
 
             @Override
-            public void onCallback(int value) {
-                Log.d("info", "InterfacePointsValue:" + value);
-                UserPoints = value;
+            public void onCallback(Users user) {
+                Log.d("info", "InterfacePointsValue:" + user.getPoints());
+                UserPoints = user.getPoints();
             }
 
 
@@ -48,9 +48,9 @@ public class ProfileFragment extends Fragment {
         int Points = userInfo.getInt("Points", 0);
 
         TUsername.setText(Username);
-        TResidency.setText(Residency);
-        TMenuType.setText(MenuType);
-        TPoints.setText("" + UserPoints);
+        TResidency.setText(Residency + " Residency");
+        TMenuType.setText(MenuType + " Menu");
+        TPoints.setText("Feedback Points:  " + UserPoints);
         return view;
     }
 
@@ -64,10 +64,10 @@ public class ProfileFragment extends Fragment {
         UtilityFunctions.getUserPoints(this.getActivity(), new firebaseCallBack() {
 
             @Override
-            public void onCallback(int value) {
-                Log.d("info", "InterfacePointsValue:" + value);
-                UserPoints = value;
-                TPoints.setText("" + UserPoints);
+            public void onCallback(Users user) {
+                Log.d("info", "InterfacePointsValue:" + user.getPoints());
+                UserPoints = user.getPoints();
+                TPoints.setText("Feedback Points:" + UserPoints);
             }
 
 

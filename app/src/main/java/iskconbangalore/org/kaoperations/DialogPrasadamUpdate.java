@@ -158,9 +158,9 @@ public class DialogPrasadamUpdate extends DialogFragment {
         UtilityFunctions.getUserPoints(this.getActivity(),new firebaseCallBack() {
 
             @Override
-            public void onCallback(int value) {
-                Log.d("info","InterfacePointsValue:"+value);
-                UserPoints = value;
+            public void onCallback(Users user) {
+                Log.d("info","InterfacePointsValue:"+user.getPoints());
+                UserPoints = user.getPoints();
             }
 
 

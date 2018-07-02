@@ -7,8 +7,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@mipmap/ic_krishna"
+        android:label="FR Prasadam"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -21,15 +21,15 @@
         <!-- &lt;!&ndash;<category android:name="android.intent.category.LAUNCHER" />&ndash;&gt; -->
         <!-- &lt;!&ndash;</intent-filter>&ndash;&gt; -->
         <!-- </activity> -->
-        <activity android:name=".Report" />
-        <activity android:name=".Rating" />
+
+
         <activity android:name=".SignInfo" />
         <activity android:name=".MenuUpdate" />
         <activity android:name=".Feedback" />
         <activity android:name=".MenuDisplay" />
         <activity
             android:name=".tabbedMain"
-            android:label="@string/title_activity_tabbed_main"
+            android:label= "FR Prasadam"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

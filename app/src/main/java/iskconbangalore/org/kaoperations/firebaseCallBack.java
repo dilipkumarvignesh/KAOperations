@@ -6,5 +6,5 @@ package iskconbangalore.org.kaoperations;
 
 
 public interface firebaseCallBack {
-    void onCallback(int value);
+    void onCallback(Users user);
 }

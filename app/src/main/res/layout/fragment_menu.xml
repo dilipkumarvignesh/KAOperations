@@ -25,77 +25,26 @@
             android:layout_height="wrap_content"
             style="@style/Widget.AppCompat.Button.Colored"
             android:text="Select Date" />
-        <TextView
-            android:id="@+id/selectedDate"
+
+
+
+        <Button android:id="@+id/UpdateMenu"
+            android:text="Update Menu"
+            android:visibility="invisible"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            />
     </LinearLayout>
-    <!--<android.support.v7.widget.CardView-->
-        <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/card_breakfast"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:onClick="navigateMenu"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:background="@drawable/selector"-->
-        <!--card_view:cardCornerRadius="10dp">-->
-        <!--<TextView-->
-            <!--android:id="@+id/menu_breakfast"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:textSize="20dp"-->
-            <!--android:text="Breakfast"-->
-            <!--android:gravity="center"-->
-            <!--android:background="@color/fui_buttonShadow"-->
-
-            <!--/>-->
-    <!--</android.support.v7.widget.CardView>-->
-
-    <!--<android.support.v7.widget.CardView-->
-        <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/card_lunch"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:onClick="navigateMenu"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:background="@drawable/selector"-->
-        <!--card_view:cardCornerRadius="10dp">-->
-        <!--<TextView-->
-            <!--android:id="@+id/menu_lunch"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:textSize="20dp"-->
-            <!--android:text="Lunch"-->
-            <!--android:gravity="center"-->
-            <!--android:background="@color/fui_buttonShadow"-->
-
-            <!--/>-->
-    <!--</android.support.v7.widget.CardView>-->
-
-    <!--<android.support.v7.widget.CardView-->
-        <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/card_Dinner"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:onClick="navigateMenu"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:background="@drawable/selector"-->
-        <!--card_view:cardCornerRadius="10dp">-->
-        <!--<TextView-->
-            <!--android:id="@+id/menu_Dinner"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:textSize="20dp"-->
-            <!--android:text="Dinner"-->
-            <!--android:gravity="center"-->
-            <!--android:background="@color/fui_buttonShadow"-->
-
-            <!--/>-->
-    <!--</android.support.v7.widget.CardView>-->
-
-
+    <TextView
+        android:id="@+id/selectedDate"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     <ListView
         android:id="@+id/listBreakfast"
         android:layout_width="match_parent"
@@ -121,12 +70,7 @@
         <!--android:layout_alignParentTop="true"-->
         <!--android:layout_centerHorizontal="true" >-->
     <!--</ListView>-->
-    <Button android:id="@+id/UpdateMenu"
-        android:text="Update Menu"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+
 
 </LinearLayout>
 

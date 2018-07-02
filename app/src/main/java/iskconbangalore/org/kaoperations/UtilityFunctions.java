@@ -18,7 +18,7 @@ public class UtilityFunctions  {
 
 
 private int UserPoints;
-private static int points;
+private static Users user;
 public static String getDate()
 {
     SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -40,7 +40,7 @@ public static String getTime()
 }
 
 
-public static int getUserPoints(Context con,firebaseCallBack callback)
+public static Users getUserPoints(Context con,firebaseCallBack callback)
 {
 
     final firebaseCallBack callBack = callback;
@@ -48,16 +48,16 @@ public static int getUserPoints(Context con,firebaseCallBack callback)
 
     String Name =  userInfo.getString("DisplayName","NA").toString();
     Log.d("info","UtilityFunctionName:"+Name);
-    DatabaseReference userNameRef = FirebaseDatabase.getInstance().getReference("users").child(Name).child("Points");
+    DatabaseReference userNameRef = FirebaseDatabase.getInstance().getReference("users").child(Name);
     userNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
 
             if (dataSnapshot.exists()) {
                 // Log.d("info","dataSnapValue:"+dataSnapshot.getValue(Users.class));
-                points = dataSnapshot.getValue(Integer.class);
-                callBack.onCallback(points);
-                Log.d("info","Points Value:"+points);
+                user = dataSnapshot.getValue(Users.class);
+                callBack.onCallback(user);
+                Log.d("info","Points Value:"+user.getPoints());
             }
 
         }
@@ -65,11 +65,32 @@ public static int getUserPoints(Context con,firebaseCallBack callback)
         @Override
         public void onCancelled(DatabaseError databaseError) {
             System.out.println("The read failed: " + databaseError.getCode());
-            points = 0;
+
         }
     });
-    return points;
+    return user;
 }
 
+    public static String getFormattedDate(int year, int month, int day) {
+        String mon="";
+        String lday = "";
+        if(day < 10)
+        {
+            lday = "0"+day;
+        }
+        else
+        {
+            lday = ""+month;
+        }
+        if(month<10)
+        {
+            mon="0"+month;
+        }
+        else
+            mon = ""+month;
 
+        String formattedDate =  ""+year+"-"+mon+"-"+lday;
+        Log.d("info","Formatted Date:"+formattedDate);
+               return formattedDate;
+    }
 }
