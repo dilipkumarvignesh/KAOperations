@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FeedbackFragment extends Fragment {
     private static final String TAG ="Profile";
@@ -42,7 +43,7 @@ public class FeedbackFragment extends Fragment {
 
         MealType = (Spinner)view.findViewById(R.id.mealType);
         feedbackDate = (CalendarView)view.findViewById(R.id.feedbackDate);
-
+        feedbackDate.setMaxDate(new Date().getTime());
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 
         String strDate = sdfDate.format(feedbackDate.getDate());

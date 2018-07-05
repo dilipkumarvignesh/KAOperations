@@ -1,6 +1,7 @@
 package iskconbangalore.org.kaoperations;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 public class ProfileFragment extends Fragment {
     private static final String TAG = "Profile";
-    private Button btnTest;
+    private Button sendNotification;
     private int UserPoints;
     Context con;
     private TextView TUsername, TResidency, TMenuType, TPoints;
@@ -51,7 +52,20 @@ public class ProfileFragment extends Fragment {
         TResidency.setText(Residency + " Residency");
         TMenuType.setText(MenuType + " Menu");
         TPoints.setText("Feedback Points:  " + UserPoints);
+
+        sendNotification = view.findViewById(R.id.sendNotification);
+        sendNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent k = new Intent(getActivity(),AdminNotifications.class);
+
+                startActivity(k);
+            }
+
+        });
         return view;
+
+
     }
 
 

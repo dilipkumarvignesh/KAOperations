@@ -9,7 +9,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_krishna"
         android:label="FR Prasadam"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_krishna_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -21,7 +21,16 @@
         <!-- &lt;!&ndash;<category android:name="android.intent.category.LAUNCHER" />&ndash;&gt; -->
         <!-- &lt;!&ndash;</intent-filter>&ndash;&gt; -->
         <!-- </activity> -->
-
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
 
         <activity android:name=".SignInfo" />
         <activity android:name=".MenuUpdate" />
@@ -29,7 +38,7 @@
         <activity android:name=".MenuDisplay" />
         <activity
             android:name=".tabbedMain"
-            android:label= "FR Prasadam"
+            android:label="FR Prasadam"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,6 +50,7 @@
             android:name=".FeedbackTab"
             android:label="@string/title_activity_tabbed_main"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AdminNotifications"></activity>
     </application>
 
 </manifest>

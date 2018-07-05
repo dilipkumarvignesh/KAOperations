@@ -204,40 +204,7 @@ public class MenuFragment extends Fragment {
                     ListAdapter adapter = new ListAdapter(getActivity(), items);
                     listBreakfast.setAdapter(adapter);
 
-//                    Dinneradapter = new ArrayAdapter<String>(getActivity(),
-//                            R.layout.menu_list, DinnerItems);
 //
-//                    ViewGroup header = (ViewGroup)layoutinflater.inflate(R.layout.breakfastheader,listBreakfast,false);
-//                    ViewGroup Lunchheader = (ViewGroup)layoutinflater.inflate(R.layout.lunchheader,listLunch,false);
-//                    ViewGroup Dinnerheader = (ViewGroup)layoutinflater.inflate(R.layout.dinnerheader,listDinner,false);
-//
-//
-//
-//                    if( listBreakfast.getHeaderViewsCount() ==0)
-//                        listBreakfast.addHeaderView(header);
-//
-//                    listBreakfast.getHeaderViewsCount();
-//
-//                   // listBreakfast.setAdapter(Breakfastadapter);
-//
-//
-//                    if( listLunch.getHeaderViewsCount() ==0)
-//                        listLunch.addHeaderView(Lunchheader);
-//                    listLunch.setAdapter(Lunchadapter);
-//
-//                    if( listDinner.getHeaderViewsCount() ==0)
-//                        listDinner.addHeaderView(Dinnerheader);
-//                   // listDinner.addHeaderView(Dinnerheader);
-//                    listDinner.setAdapter(Dinneradapter);
-
-//                    adapter.addView(header);
-//                    adapter.addAdapter(Breakfastadapter);
-//                    adapter.addView(Lunchheader);
-//                    adapter.addAdapter(Lunchadapter);
-//                    setListAdapter(adapter);
-//                    Tbreakfast.setText(Tbreak);
-//                    Tlunch.setText(Tlun);
-//                    Tdinner.setText(TDin);
                     Log.d("info","Breakfast:"+breakfast);
                     Log.d("info","Datasnapshot:"+dataSnapshot.getChildren());
 
