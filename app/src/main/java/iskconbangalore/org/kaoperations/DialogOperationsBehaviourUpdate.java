@@ -158,7 +158,7 @@ public class DialogOperationsBehaviourUpdate extends DialogFragment {
         emailIntent.putExtra(Intent.EXTRA_CC, CC);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "KrishnaAmrita Prasadam Feedback");
         String output = "" + "Hare Krishna Prabhu ," +
-                "\n\n\nFeedback for Behaviour\n"+" for Date : "+selectedDate+"\n"+
+                "\n\n\nFeedback for Behaviour for Date : "+selectedDate+"\n"+
                 "Delivery : "+Behaviour+"\n"+
                 "Comments : "+Comments+"\n\n With Regards,\n"+displayName;;
 
