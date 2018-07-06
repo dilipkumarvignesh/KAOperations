@@ -149,8 +149,8 @@ public class DialogOperationsHygieneUpdate extends DialogFragment {
     }
     protected void sendEmail(String Hygiene,String Comments) {
         Log.i("Send email", "");
-        String[] TO = {"dilipkumarvignesh@gmail.com "};
-        String[] CC = {"srrdasa@gmail.com"};
+        String[] TO = {"krmt.office@hkm-group.org"};
+        String[] CC = {"admin.folk@hkm-group.org"};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
 

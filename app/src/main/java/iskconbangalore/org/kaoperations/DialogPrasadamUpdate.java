@@ -208,8 +208,8 @@ public class DialogPrasadamUpdate extends DialogFragment {
 
     protected void sendEmail(String QualityFeedback,String QuantityFeedback,String OverallFeedback,String Comments) {
         Log.i("Send email", "");
-        String[] TO = {"dilipkumarvignesh@gmail.com "};
-        String[] CC = {};
+        String[] TO = {"krmt.office@hkm-group.org"};
+        String[] CC = {"admin.folk@hkm-group.org"};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
 

@@ -132,6 +132,13 @@ public class ProfileFragment extends Fragment {
 
         });
 
+        String Username = userInfo.getString("Name", "NA").toString();
+        String Residency = userInfo.getString("Residency", "NA").toString();
+
+
+        TUsername.setText(Username);
+        TResidency.setText(Residency + " Residency");
+
         // put your code here...
 
     }
