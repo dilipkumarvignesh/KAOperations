@@ -23,7 +23,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class tabbedMain extends AppCompatActivity {
 
@@ -47,19 +46,15 @@ public class tabbedMain extends AppCompatActivity {
         root = FirebaseDatabase.getInstance().getReference();
 // ...
         Log.d("info","Inside Tabbed Main");
-        //Toast.makeText(this,"Welcome Back "+ name,Toast.LENGTH_LONG).show();
-//        Intent k = new Intent(getApplicationContext(),tabbedMain.class);
-//        //  k.putExtra("name",name);
-//        startActivity(k);
 
-// ..Choose authentication providers
-        List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
-//noinspection RestrictedApi
         startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
+                        .setLogo( R.mipmap.ic_krishna_round )
+                        .setIsSmartLockEnabled( false )
+                        .setAvailableProviders(Arrays.asList(
+                                new AuthUI.IdpConfig.GoogleBuilder().build()))
+
                         .build(),
                 RC_SIGN_IN);
 
@@ -69,6 +64,8 @@ public class tabbedMain extends AppCompatActivity {
             // Name, email address, and profile photo Url
             name = user.getDisplayName();
             email = user.getEmail();
+            String mUserprofileUrl = user.getPhotoUrl().toString();
+            Log.d("info","Photo URL:"+mUserprofileUrl);
 //            String no = user.
             Log.d("info","Username:"+name);
             Log.d("info","Email:"+email);

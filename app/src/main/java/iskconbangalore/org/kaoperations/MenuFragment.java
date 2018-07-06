@@ -2,7 +2,6 @@ package iskconbangalore.org.kaoperations;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -43,29 +42,29 @@ public class MenuFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.fragment_menu,container,false);
         btnTest = view.findViewById(R.id.selDate);
-        MenuUpdate = view.findViewById(R.id.UpdateMenu);
+       // MenuUpdate = view.findViewById(R.id.UpdateMenu);
         selectedDate=view.findViewById(R.id.selectedDate);
         listBreakfast = view.findViewById(R.id.listBreakfast);
 //        listLunch = view.findViewById(R.id.listLunch);
 //        listDinner = view.findViewById(R.id.listDinner);
         layoutinflater = inflater;
 
-        UtilityFunctions.getUserPoints(this.getActivity(),new firebaseCallBack() {
-
-            @Override
-            public void onCallback(Users user) {
-                Log.d("info","InterfacePointsValue:"+user.getPoints());
-                admin= user.getAdmin();
-                Log.d("info","admin Value:"+admin);
-                if(admin == 1)
-                {
-
-                    MenuUpdate.setVisibility(View.VISIBLE);
-                }
-            }
-
-
-        });
+//        UtilityFunctions.getUserPoints(this.getActivity(),new firebaseCallBack() {
+//
+//            @Override
+//            public void onCallback(Users user) {
+//                Log.d("info","InterfacePointsValue:"+user.getPoints());
+//                admin= user.getAdmin();
+//                Log.d("info","admin Value:"+admin);
+//                if(admin == 1)
+//                {
+//
+//                    MenuUpdate.setVisibility(View.VISIBLE);
+//                }
+//            }
+//
+//
+//        });
 
 
 
@@ -83,14 +82,14 @@ public class MenuFragment extends Fragment {
             }
 
         });
-        MenuUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent k = new Intent(getActivity(),MenuUpdate.class);
-
-                startActivity(k);
-            }
-        });
+//        MenuUpdate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent k = new Intent(getActivity(),MenuUpdate.class);
+//
+//                startActivity(k);
+//            }
+//        });
 
 //        Tbreakfast = view.findViewById(R.id.menu_breakfast);
 //        Tlunch = view.findViewById(R.id.menu_lunch);

@@ -15,8 +15,9 @@ import android.widget.TextView;
 
 public class ProfileFragment extends Fragment {
     private static final String TAG = "Profile";
-    private Button sendNotification;
+    private Button sendNotification,MenuUpdate,fetchFeedback;
     private int UserPoints;
+    private String Username,Residency;
     Context con;
     private TextView TUsername, TResidency, TMenuType, TPoints;
 
@@ -29,7 +30,7 @@ public class ProfileFragment extends Fragment {
 
         TUsername = view.findViewById(R.id.Username);
         TResidency = view.findViewById(R.id.UserResidency);
-        TMenuType = view.findViewById(R.id.UserMenuType);
+       // TMenuType = view.findViewById(R.id.UserMenuType);
         TPoints = view.findViewById(R.id.UserPoints);
 
         SharedPreferences userInfo = getActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
@@ -39,6 +40,9 @@ public class ProfileFragment extends Fragment {
             public void onCallback(Users user) {
                 Log.d("info", "InterfacePointsValue:" + user.getPoints());
                 UserPoints = user.getPoints();
+//                Username = user.getName();
+//                Residency = user.getResidency();
+
             }
 
 
@@ -50,14 +54,55 @@ public class ProfileFragment extends Fragment {
 
         TUsername.setText(Username);
         TResidency.setText(Residency + " Residency");
-        TMenuType.setText(MenuType + " Menu");
+      //  TMenuType.setText(MenuType + " Menu");
         TPoints.setText("Feedback Points:  " + UserPoints);
 
+
+        MenuUpdate = view.findViewById(R.id.UpdateMenu);
         sendNotification = view.findViewById(R.id.sendNotification);
+       // fetchFeedback = view.findViewById(R.id.fetchFeedback);
+
+        UtilityFunctions.getUserPoints(this.getActivity(),new firebaseCallBack() {
+
+            @Override
+            public void onCallback(Users user) {
+                Log.d("info","InterfacePointsValue:"+user.getPoints());
+                int admin= user.getAdmin();
+                Log.d("info","admin Value:"+admin);
+                if(admin == 1)
+                {
+                    sendNotification.setVisibility(View.VISIBLE);
+                    //fetchFeedback.setVisibility(View.VISIBLE);
+                    MenuUpdate.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+
+        });
+//        fetchFeedback.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent k = new Intent(getActivity(),Feedback.class);
+//
+//                startActivity(k);
+//            }
+//
+//        });
         sendNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent k = new Intent(getActivity(),AdminNotifications.class);
+
+                startActivity(k);
+            }
+
+        });
+
+        MenuUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent k = new Intent(getActivity(),MenuUpdate.class);
 
                 startActivity(k);
             }

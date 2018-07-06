@@ -52,7 +52,7 @@ public class FeedbackFragment extends Fragment {
         feedbackDate.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String mon="";
+                String mon="",day="";
                 month=month+1;
                 if(month<10)
                 {
@@ -60,7 +60,13 @@ public class FeedbackFragment extends Fragment {
                 }
                 else
                     mon=mon+month;
-              feedBackDat=year+"-"+mon+"-"+dayOfMonth;
+                if(dayOfMonth<10)
+                {
+                    day="0"+dayOfMonth;
+                }
+                else
+                    day=day+dayOfMonth;
+              feedBackDat=year+"-"+mon+"-"+day;
             }
         });
         return view;

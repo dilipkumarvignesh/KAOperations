@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 public class OperationFragment extends Fragment {
     private static final String TAG ="Profile";
+    private String SelectedDate,MealType;
     private Button btnTest;
     private SectionsPageAdapter mSectionsPageAdapter;
     private ViewPager mViewPager;
@@ -30,7 +31,8 @@ public class OperationFragment extends Fragment {
         ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.menu_list,operationItems);
         lView.setAdapter(adapter);
-
+        SelectedDate = getArguments().getString("SelectedDate");
+        MealType = getArguments().getString("MealType");
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -38,28 +40,26 @@ public class OperationFragment extends Fragment {
 
                 String selItem = (String) lView.getItemAtPosition(position);
                 Log.d("info","SelectedItem:"+selItem);
-
-                if(position == 0)
-                {
-                    DialogOperationsDeliveryUpdate Delivery_Update = new DialogOperationsDeliveryUpdate();
                 Bundle args = new Bundle();
                 args.putString("Item", selItem);
+                args.putString("SelectedDate",SelectedDate);
+                args.putString("Meal",MealType);
+                if(position == 0)
+                {
+
+                    DialogOperationsDeliveryUpdate Delivery_Update = new DialogOperationsDeliveryUpdate();
                 Delivery_Update.setArguments(args);
                 Delivery_Update.show(getActivity().getFragmentManager(), "DeliveryUpdate");
                 }
                 else if(position == 1)
                 {
                     DialogOperationsHygieneUpdate Hygiene_Update = new DialogOperationsHygieneUpdate();
-                    Bundle args = new Bundle();
-                    args.putString("Item", selItem);
                     Hygiene_Update.setArguments(args);
                     Hygiene_Update.show(getActivity().getFragmentManager(), "DeliveryUpdate");
                 }
                 else
                 {
                     DialogOperationsBehaviourUpdate Behaviour_Update = new DialogOperationsBehaviourUpdate();
-                    Bundle args = new Bundle();
-                    args.putString("Item", selItem);
                     Behaviour_Update.setArguments(args);
                     Behaviour_Update.show(getActivity().getFragmentManager(), "DeliveryUpdate");
                 }

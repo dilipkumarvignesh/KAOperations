@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +28,9 @@ import java.util.Map;
 
 public class DialogOperationsHygieneUpdate extends DialogFragment {
 
-    String Item;
+    String Item,selectedDate;
+    private static String displayName;
+    private int UserPoints;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final View view = this.getActivity().getLayoutInflater().inflate(R.layout.dialog_operations_update_2, null);
@@ -34,9 +38,21 @@ public class DialogOperationsHygieneUpdate extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         Bundle mArgs = getArguments();
         Item = mArgs.getString("Item");
+        selectedDate = mArgs.getString("SelectedDate");
+        UtilityFunctions.getUserPoints(this.getActivity(),new firebaseCallBack() {
+
+            @Override
+            public void onCallback(Users user) {
+                Log.d("info","InterfacePointsValueHygiene:"+user.getPoints());
+                UserPoints = user.getPoints();
+                //  displayName = user.getName();
+            }
+
+
+        });
         // Dialog th = this;
         // Set the dialog title
-        builder.setTitle("Update Feedback for "+Item)
+        builder
                 // Specify the list array, the items to be selected by default (null for none),
                 // and the listener through which to receive callbacks when items are selected
                 .setView(inflater.inflate(R.layout.dialog_operations_update_2, null))
@@ -87,9 +103,12 @@ public class DialogOperationsHygieneUpdate extends DialogFragment {
         final Context con = this.getActivity();
         SharedPreferences userInfo = getActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
 
-        final String displayName =  userInfo.getString("DisplayName","NA").toString();
+        displayName =  userInfo.getString("DisplayName","NA").toString();
+
         final String feedBackHygiene = Hygiene;
         final String Comments = comments;
+
+        sendEmail(Hygiene,Comments);
         userNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -109,8 +128,10 @@ public class DialogOperationsHygieneUpdate extends DialogFragment {
 
                     String key = root.child("Feedback").child(Date).push().getKey();
                     Map<String, Object> childUpdates = new HashMap<>();
-                    childUpdates.put("/Feedback/" + Date + "/" + key+"/Hygiene", feedback);
-                    childUpdates.put("/users/" + displayName + "/Feedback/" + Date+"/Hygiene", feedback);
+                    childUpdates.put("/Feedback/" + selectedDate + "/" + key+"/Hygiene", feedback);
+                    Log.d("info","HygienePointsValue:"+UserPoints+1);
+                    childUpdates.put("/users/"+displayName+"/Points",UserPoints+1);
+                    childUpdates.put("/users/" + displayName + "/Feedback/" + selectedDate +"/Hygiene", feedback);
 
                     root.updateChildren(childUpdates);
                 } else {
@@ -125,5 +146,32 @@ public class DialogOperationsHygieneUpdate extends DialogFragment {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+    }
+    protected void sendEmail(String Hygiene,String Comments) {
+        Log.i("Send email", "");
+        String[] TO = {"dilipkumarvignesh@gmail.com "};
+        String[] CC = {"srrdasa@gmail.com"};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "KrishnaAmrita Prasadam Feedback");
+        String output = "" + "Hare Krishna Prabhu ," +
+                "\n\n\nFeedback for Hygiene for Date : "+selectedDate+"\n"+
+                "Hygiene : "+Hygiene+"\n"+
+                "Comments : "+Comments+"\n\n With Regards,\n"+displayName;;
+
+        emailIntent.putExtra(Intent.EXTRA_TEXT, output);
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            //
+            Log.i("info","Finished sending email...");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this.getActivity(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

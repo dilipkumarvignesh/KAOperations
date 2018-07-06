@@ -18,7 +18,7 @@ public class FeedbackTab extends AppCompatActivity implements DialogPrasadamUpda
 
     private ViewPager mViewPager;
 
-    private static String MealType,feedbackDate;
+    private static String MealType, feedbackDate;
 
 
     @Override
@@ -39,20 +39,20 @@ public class FeedbackTab extends AppCompatActivity implements DialogPrasadamUpda
 
         MealType = intent.getStringExtra("SelMealType");
         feedbackDate = intent.getStringExtra("SelectedDate");
-        Log.d("info","FeedbackTabIntent:"+intent.getStringExtra("SelMealType")+intent.getStringExtra("SelMealType"));
+        Log.d("info", "FeedbackTabIntent:" + intent.getStringExtra("SelMealType") + intent.getStringExtra("SelMealType"));
         //getValues();
 
 
     }
 
-    public static HashMap<String, String> getValues()
-    {
-        HashMap<String, String> hmap= new HashMap<String, String>();
-        hmap.put("MealType",MealType);
-        hmap.put("FeedbackDate",feedbackDate);
+    public static HashMap<String, String> getValues() {
+        HashMap<String, String> hmap = new HashMap<String, String>();
+        hmap.put("MealType", MealType);
+        hmap.put("FeedbackDate", feedbackDate);
         return hmap;
 
     }
+
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new OperationFragment(), "Operations");
@@ -63,11 +63,14 @@ public class FeedbackTab extends AppCompatActivity implements DialogPrasadamUpda
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        Log.d("info","Called from Prasadam Tab");
+        Log.d("info", "Called from Prasadam Tab");
     }
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
 
     }
+
 }
+
+

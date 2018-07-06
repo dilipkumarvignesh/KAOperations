@@ -6,16 +6,14 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -33,7 +31,9 @@ import java.util.Map;
 public class DialogPrasadamUpdate extends DialogFragment {
     String name;
     String Item;
+    String selectedDate;
     static int UserPoints;
+    static String displayName;
     public interface NoticeDialogListener {
         public void onDialogPositiveClick(DialogFragment dialog);
 
@@ -62,27 +62,30 @@ public class DialogPrasadamUpdate extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final View view = this.getActivity().getLayoutInflater().inflate(R.layout.dialog_prasadam_update, null);
         LayoutInflater inflater = getActivity().getLayoutInflater();
+       // LayoutInflater inflater = (LayoutInflater)this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         SharedPreferences userInfo = getActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+
+        final View view1 = inflater.inflate(R.layout.dialog_prasadam_update, null, false);
 
         name =  userInfo.getString("Name","NA").toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         Bundle mArgs = getArguments();
-         Item = mArgs.getString("Item");
-        TextView myMsg = new TextView(getActivity());
-        myMsg.setText(Item);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0,100,0,0);
-        myMsg.setLayoutParams(params);
+        Item = mArgs.getString("Item");
+        selectedDate = mArgs.getString("SelectedDate");
+        Log.d("info","Menu Selected Date"+selectedDate);
+        UtilityFunctions.getUserPoints(this.getActivity(),new firebaseCallBack() {
 
-        myMsg.setTypeface(Typeface.DEFAULT_BOLD);
-        myMsg.setGravity(Gravity.CENTER_HORIZONTAL);
-        myMsg.setTextSize(20);
-        myMsg.setTextColor(Color.BLACK);
-        //set custom title
+            @Override
+            public void onCallback(Users user) {
+                Log.d("info","InterfacePointsValue:"+user.getPoints());
+                UserPoints = user.getPoints();
+                //  displayName = user.getName();
+            }
 
-        // Dialog th = this;
-        // Set the dialog title
-        builder.setCustomTitle(myMsg)
+
+        });
+
+        builder
                 // Specify the list array, the items to be selected by default (null for none),
                 // and the listener through which to receive callbacks when items are selected
                 .setView(inflater.inflate(R.layout.dialog_prasadam_update, null))
@@ -95,7 +98,7 @@ public class DialogPrasadamUpdate extends DialogFragment {
                         mListener.onDialogPositiveClick(DialogPrasadamUpdate.this);
                         String Quantity = "", Quality = "", Feedback="";
 
-                        TextView title = ((AlertDialog) dialog).findViewById(R.id.PrasadamName);
+                        TextView title = view.findViewById(R.id.PrasadamName);
                         title.setText(Item);
 
                         RadioGroup RQuantity = ((AlertDialog) dialog).findViewById(R.id.RadioQuantity);
@@ -155,18 +158,10 @@ public class DialogPrasadamUpdate extends DialogFragment {
         final String Comments = comments;
 
         SharedPreferences userInfo = getActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
-        UtilityFunctions.getUserPoints(this.getActivity(),new firebaseCallBack() {
 
-            @Override
-            public void onCallback(Users user) {
-                Log.d("info","InterfacePointsValue:"+user.getPoints());
-                UserPoints = user.getPoints();
-            }
-
-
-        });
         //Log.d("info","Dialog Points:"+points);
-       final String displayName =  userInfo.getString("DisplayName","NA").toString();
+        displayName =  userInfo.getString("DisplayName","NA").toString();
+        sendEmail(QualityFeedback,QuantityFeedback,OverallFeedback,Comments);
         userNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -188,13 +183,15 @@ public class DialogPrasadamUpdate extends DialogFragment {
                     String key = root.child("Feedback").child(Date).push().getKey();
                     Map<String, Object> childUpdates = new HashMap<>();
 
-                    childUpdates.put("/Feedback/" + Date + "/" + key+"/"+Item, feedback);
+                    childUpdates.put("/Feedback/" + selectedDate + "/" + key+"/"+Item, feedback);
+
                     childUpdates.put("/users/"+displayName+"/Points",UserPoints+1);
-                    childUpdates.put("/users/" + displayName + "/Feedback/" + Date+"/"+Item, feedback);
+                    childUpdates.put("/users/" + displayName + "/Feedback/" + selectedDate+"/"+Item, feedback);
 
 
 
                     root.updateChildren(childUpdates);
+
                 } else {
                     Toast.makeText(con, "Already updated for today", Toast.LENGTH_LONG).show();
                 }
@@ -207,5 +204,34 @@ public class DialogPrasadamUpdate extends DialogFragment {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+    }
+
+    protected void sendEmail(String QualityFeedback,String QuantityFeedback,String OverallFeedback,String Comments) {
+        Log.i("Send email", "");
+        String[] TO = {"dilipkumarvignesh@gmail.com "};
+        String[] CC = {};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "KrishnaAmrita Prasadam Feedback");
+        String output = "" + "Hare Krishna Prabhu ," +
+                "\n\nFeedback for "+Item+" for Date : "+selectedDate+"\n"+
+                "Quality : "+QualityFeedback+"\n"+
+                "Quantity : "+QuantityFeedback+"\n"+
+                "Taste : "+OverallFeedback+"\n"+
+                "Comments : "+Comments+"\n\n With Regards,\n"+displayName;
+        emailIntent.putExtra(Intent.EXTRA_TEXT, output);
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+           //
+            Log.i("info","Finished sending email...");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this.getActivity(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

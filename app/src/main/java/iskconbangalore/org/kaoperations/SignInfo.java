@@ -1,5 +1,6 @@
 package iskconbangalore.org.kaoperations;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -67,6 +68,10 @@ public class SignInfo extends AppCompatActivity {
         DatabaseReference root = FirebaseDatabase.getInstance().getReference();
         root.child("users").child(name).updateChildren(User_Updates);
         Toast.makeText(this,"User Details Updated",Toast.LENGTH_LONG).show();
+
+        Intent k = new Intent(this,tabbedMain.class);
+
+        startActivity(k);
 
     }
 

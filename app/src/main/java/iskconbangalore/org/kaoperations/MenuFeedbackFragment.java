@@ -55,6 +55,8 @@ public class MenuFeedbackFragment extends Fragment implements DialogPrasadamUpda
                 DialogPrasadamUpdate prasadam_Update = new DialogPrasadamUpdate();
                 Bundle args = new Bundle();
                 args.putString("Item", selItem);
+                args.putString("SelectedDate",SelectedDate);
+                args.putString("Meal",MealType);
                 prasadam_Update.setArguments(args);
                 prasadam_Update.show(getActivity().getFragmentManager(), "PrasadamUpdate");
             }
@@ -77,7 +79,7 @@ public class MenuFeedbackFragment extends Fragment implements DialogPrasadamUpda
         final String Meal = MealType;
         Log.d("info","DBRef:"+FirebaseDatabase.getInstance().getReference("Menu"));
         SharedPreferences userInfo = getActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
-
+        Log.d("info","MenuSelectedDate"+SelectedDate);
         String MenuType =  userInfo.getString("MenuType","NA").toString();
         DatabaseReference todayDateNode = FirebaseDatabase.getInstance().getReference("Menu").child(SelectedDate).child(MenuType);
         final Context delActivity = getActivity();
@@ -99,17 +101,6 @@ public class MenuFeedbackFragment extends Fragment implements DialogPrasadamUpda
                             R.layout.menu_list, Items);
                     lView.setAdapter(adapter);
 
-//                    String Lunch = dataSnapshot.child("Lunch").getValue().toString();
-//                    String Dinner = dataSnapshot.child("Dinner").getValue().toString();
-//
-//                    String Tbreak = "BreakFast" + ":"+ breakfast;
-//                    String Tlun = "Lunch" + ":"+ Lunch;
-//                    String TDin = "Dinner" + ":"+ Dinner;
-
-//                    Tbreakfast.setText(Tbreak);
-//                    Tlunch.setText(Tlun);
-//                    Tdinner.setText(TDin);
-
                     Log.d("info","Datasnapshot:"+dataSnapshot.child("Breakfast").getValue().toString());
 
 
@@ -121,9 +112,7 @@ public class MenuFeedbackFragment extends Fragment implements DialogPrasadamUpda
                 {
                     Toast.makeText(getActivity(),"Menu Not Available",Toast.LENGTH_LONG).show();
                     progress.dismiss();
-//                    Tbreakfast.setText("NA");
-//                    Tlunch.setText("NA");
-//                    Tdinner.setText("NA");
+
                 }
             }
             @Override

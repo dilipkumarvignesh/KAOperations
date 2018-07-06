@@ -5,25 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notification Center"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:layout_gravity="center_horizontal"/>
     <EditText
+
+        android:layout_marginTop="20dp"
         android:id="@+id/notificationTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Title"/>
     <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/notificationBody"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:hint="Enter Message"/>
     <Button
         android:id="@+id/sendMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send Message"
+        android:hint="Send"
         android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
