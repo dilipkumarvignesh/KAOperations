@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import com.firebase.ui.auth.AuthUI;
@@ -160,4 +161,7 @@ public class tabbedMain extends AppCompatActivity {
     }
 
 
+    public void submitFeedback(View view) {
+
+    }
 }

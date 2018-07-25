@@ -39,5 +39,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:onClick="submitFeedback"
+        android:id="@+id/SubmitFeedback"
+        android:text="Submit Feedback"/>
 
 </android.support.design.widget.CoordinatorLayout>

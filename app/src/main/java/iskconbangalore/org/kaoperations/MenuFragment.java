@@ -134,12 +134,6 @@ public class MenuFragment extends Fragment {
         SharedPreferences userInfo = getActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
         String MenuType =  userInfo.getString("MenuType","NA").toString();
         DatabaseReference todayDateNode = FirebaseDatabase.getInstance().getReference("Menu").child(selectedDate.getText().toString()).child(MenuType);
-        //final Context delActivity = getActivity();
-       // final ProgressDialog progress = new ProgressDialog(delActivity);
-//        progress.setTitle("Loading");
-//        progress.setMessage("Please Wait...");
-//        progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
-//        progress.show();
 
         todayDateNode.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -160,28 +154,7 @@ public class MenuFragment extends Fragment {
                     {
                         items.add(new ListCell(BreakfastItems[i], "Breakfast"));
                     }
-                    //Add fake data to our list - notice unsorted order
-//                    items.add(new ListCell("Apple", "Electronics"));
-//                    items.add(new ListCell("BMW", "Cars"));
-//                    items.add(new ListCell("Samsung", "Electronics"));
-//                    items.add(new ListCell("Audi", "Cars"));
-//                    items.add(new ListCell("Brazil", "Countries"));
-//                    items.add(new ListCell("Sony", "Electronics"));
-//                    items.add(new ListCell("Turkey", "Countries"));
-//                    items.add(new ListCell("LG", "Electronics"));
-//                    items.add(new ListCell("Denmark", "Countries"));
-
-
-
-//                    items = sortAndAddSections(items);
-//
-//                    ListAdapter adapter = new ListAdapter(getActivity(), items);
-//                    listBreakfast.setAdapter(adapter);
-
-//
-//                     Breakfastadapter = new ArrayAdapter<String>(getActivity(),
-//                            R.layout.menu_list, BreakfastItems);
-//                     Breakfastadapter.notifyDataSetChanged();
+                    
                     String[] LunchItems = Lunch.split(",");
 
                     for (int i =0;i<LunchItems.length;i++)

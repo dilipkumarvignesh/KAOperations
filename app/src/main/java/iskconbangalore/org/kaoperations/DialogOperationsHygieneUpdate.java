@@ -1,5 +1,6 @@
 package iskconbangalore.org.kaoperations;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -28,9 +29,29 @@ import java.util.Map;
 
 public class DialogOperationsHygieneUpdate extends DialogFragment {
 
-    String Item,selectedDate;
+    String Item,selectedDate,Meal;
     private static String displayName;
     private int UserPoints;
+    OnHeadlineSelectedListener mCallback;
+    public interface OnHeadlineSelectedListener {
+        public void onFeedbackAdded(Map<String,String> feedback);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Verify that the host activity implements the callback interface
+        try {
+            // Instantiate the NoticeDialogListener so we can send events to the host
+
+            mCallback = (OnHeadlineSelectedListener) activity;
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface, throw exception
+            throw new ClassCastException(activity.toString()
+                    + " must implement NoticeDialogListener");
+        }
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final View view = this.getActivity().getLayoutInflater().inflate(R.layout.dialog_operations_update_2, null);
@@ -39,6 +60,7 @@ public class DialogOperationsHygieneUpdate extends DialogFragment {
         Bundle mArgs = getArguments();
         Item = mArgs.getString("Item");
         selectedDate = mArgs.getString("SelectedDate");
+        Meal = mArgs.getString("Meal");
         UtilityFunctions.getUserPoints(this.getActivity(),new firebaseCallBack() {
 
             @Override
@@ -108,7 +130,7 @@ public class DialogOperationsHygieneUpdate extends DialogFragment {
         final String feedBackHygiene = Hygiene;
         final String Comments = comments;
 
-        sendEmail(Hygiene,Comments);
+        //sendEmail(Hygiene,Comments);
         userNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -124,6 +146,9 @@ public class DialogOperationsHygieneUpdate extends DialogFragment {
                     feedback.put("Hygiene",feedBackHygiene);
 
                     feedback.put("Comments",Comments);
+                    feedback.put("Meal",Meal);
+                    feedback.put("Item","Hygiene");
+                    feedback.put("SelectedDate",selectedDate);
 
 
                     String key = root.child("Feedback").child(Date).push().getKey();
@@ -132,7 +157,7 @@ public class DialogOperationsHygieneUpdate extends DialogFragment {
                     Log.d("info","HygienePointsValue:"+UserPoints+1);
                     childUpdates.put("/users/"+displayName+"/Points",UserPoints+1);
                     childUpdates.put("/users/" + displayName + "/Feedback/" + selectedDate +"/Hygiene", feedback);
-
+                    mCallback.onFeedbackAdded(feedback);
                     root.updateChildren(childUpdates);
                 } else {
                     Toast.makeText(con, "Already updated for today", Toast.LENGTH_LONG).show();

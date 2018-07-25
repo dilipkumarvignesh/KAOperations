@@ -50,7 +50,8 @@
             android:name=".FeedbackTab"
             android:label="@string/title_activity_tabbed_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AdminNotifications"></activity>
+        <activity android:name=".AdminNotifications" />
+        <activity android:name=".DisplayNotificationActivity"></activity>
     </application>
 
 </manifest>

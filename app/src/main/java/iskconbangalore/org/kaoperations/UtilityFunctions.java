@@ -80,7 +80,7 @@ public static Users getUserPoints(Context con,firebaseCallBack callback)
         }
         else
         {
-            lday = ""+month;
+            lday = ""+day;
         }
         if(month<10)
         {

@@ -6,9 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,15 +28,21 @@ import java.util.Map;
 
 public class DialogPrasadamUpdate extends DialogFragment {
     String name;
-    String Item;
+    String Item,Meal;
     String selectedDate;
     static int UserPoints;
+    OnHeadlineSelectedListener mCallback;
     static String displayName;
     public interface NoticeDialogListener {
         public void onDialogPositiveClick(DialogFragment dialog);
 
         public void onDialogNegativeClick(DialogFragment dialog);
     }
+
+    public interface OnHeadlineSelectedListener {
+        public void onFeedbackAdded(Map<String,String> feedback);
+    }
+
 
     // Use this instance of the interface to deliver action events
     NoticeDialogListener mListener;
@@ -51,6 +55,7 @@ public class DialogPrasadamUpdate extends DialogFragment {
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
             mListener = (NoticeDialogListener) activity;
+            mCallback = (OnHeadlineSelectedListener) activity;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
@@ -72,6 +77,7 @@ public class DialogPrasadamUpdate extends DialogFragment {
         Bundle mArgs = getArguments();
         Item = mArgs.getString("Item");
         selectedDate = mArgs.getString("SelectedDate");
+        Meal = mArgs.getString("Meal");
         Log.d("info","Menu Selected Date"+selectedDate);
         UtilityFunctions.getUserPoints(this.getActivity(),new firebaseCallBack() {
 
@@ -161,7 +167,7 @@ public class DialogPrasadamUpdate extends DialogFragment {
 
         //Log.d("info","Dialog Points:"+points);
         displayName =  userInfo.getString("DisplayName","NA").toString();
-        sendEmail(QualityFeedback,QuantityFeedback,OverallFeedback,Comments);
+     //   sendEmail(QualityFeedback,QuantityFeedback,OverallFeedback,Comments);
         userNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -178,17 +184,20 @@ public class DialogPrasadamUpdate extends DialogFragment {
                     feedback.put("Quality",QualityFeedback);
                     feedback.put("Taste",OverallFeedback);
                     feedback.put("Comments",Comments);
+                    feedback.put("Item",Item);
+                    feedback.put("Meal",Meal);
+                    feedback.put("SelectedDate",selectedDate);
 
 
                     String key = root.child("Feedback").child(Date).push().getKey();
                     Map<String, Object> childUpdates = new HashMap<>();
 
                     childUpdates.put("/Feedback/" + selectedDate + "/" + key+"/"+Item, feedback);
-
                     childUpdates.put("/users/"+displayName+"/Points",UserPoints+1);
                     childUpdates.put("/users/" + displayName + "/Feedback/" + selectedDate+"/"+Item, feedback);
 
 
+                   mCallback.onFeedbackAdded(feedback);
 
                     root.updateChildren(childUpdates);
 
@@ -206,32 +215,32 @@ public class DialogPrasadamUpdate extends DialogFragment {
         });
     }
 
-    protected void sendEmail(String QualityFeedback,String QuantityFeedback,String OverallFeedback,String Comments) {
-        Log.i("Send email", "");
-        String[] TO = {"krmt.office@hkm-group.org"};
-        String[] CC = {"admin.folk@hkm-group.org"};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-
-
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "KrishnaAmrita Prasadam Feedback");
-        String output = "" + "Hare Krishna Prabhu ," +
-                "\n\nFeedback for "+Item+" for Date : "+selectedDate+"\n"+
-                "Quality : "+QualityFeedback+"\n"+
-                "Quantity : "+QuantityFeedback+"\n"+
-                "Taste : "+OverallFeedback+"\n"+
-                "Comments : "+Comments+"\n\n With Regards,\n"+displayName;
-        emailIntent.putExtra(Intent.EXTRA_TEXT, output);
-
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-           //
-            Log.i("info","Finished sending email...");
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this.getActivity(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    protected void sendEmail(String QualityFeedback,String QuantityFeedback,String OverallFeedback,String Comments) {
+//        Log.i("Send email", "");
+//        String[] TO = {"krmt.office@hkm-group.org"};
+//        String[] CC = {"admin.folk@hkm-group.org"};
+//        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//
+//
+//        emailIntent.setData(Uri.parse("mailto:"));
+//        emailIntent.setType("text/plain");
+//        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+//        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+//        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "KrishnaAmrita Prasadam Feedback");
+//        String output = "" + "Hare Krishna Prabhu ," +
+//                "\n\nFeedback for "+Item+" for Date : "+selectedDate+"\n"+
+//                "Quality : "+QualityFeedback+"\n"+
+//                "Quantity : "+QuantityFeedback+"\n"+
+//                "Taste : "+OverallFeedback+"\n"+
+//                "Comments : "+Comments+"\n\n With Regards,\n"+displayName;
+//        emailIntent.putExtra(Intent.EXTRA_TEXT, output);
+//
+//        try {
+//            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//           //
+//            Log.i("info","Finished sending email...");
+//        } catch (android.content.ActivityNotFoundException ex) {
+//            Toast.makeText(this.getActivity(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 }
