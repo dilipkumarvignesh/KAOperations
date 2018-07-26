@@ -45,9 +45,21 @@ public class tabbedMain extends AppCompatActivity {
         setContentView(R.layout.activity_tabbed_main);
         mAuth = FirebaseAuth.getInstance();
         root = FirebaseDatabase.getInstance().getReference();
-// ...
+
         Log.d("info","Inside Tabbed Main");
 
+        Intent i = getIntent();
+
+        if (i != null) {
+
+            String title = i.getStringExtra("title");
+            String body = i.getStringExtra("body");
+            Intent k = new Intent(getApplicationContext(), DisplayNotificationActivity.class);
+            k.putExtra("title", title);
+            k.putExtra("title", body);
+            startActivity(k);
+
+        }
         startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()

@@ -158,11 +158,16 @@ public class FeedbackTab extends AppCompatActivity implements DialogPrasadamUpda
         emailIntent.setType("text/plain");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "KrishnaAmrita Prasadam Feedback");
+
         String output = "Hare Krishna Prabhu ,";
         for ( int i=0;i<Feedbacklist.size();i++ )
         {
             Map<String, String> map = (Map)Feedbacklist.get(i);
+            if(i == 0)
+            {
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "( "+UserDetails.getResidency()+" Residency )"+ map.get("Meal")+ " "+map.get("SelectedDate")+" Prasadam Feedback");
+            }
+
             output+="\n\nFeedback on "+map.get("Item")+" for "+map.get("Meal")+" of Date : "+map.get("SelectedDate")+"\n";
 
                // Log.d("info","MapENtries:"+entry.getKey() + "/" + entry.getValue());

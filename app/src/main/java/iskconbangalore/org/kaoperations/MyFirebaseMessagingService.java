@@ -32,29 +32,34 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //It is optional
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+        Log.d("info","Message Title:"+remoteMessage.getNotification().getTitle());
 //        Log.d(TAG,"Notification Content"+remoteMessage.)
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Data Payload: " + remoteMessage.getData().get("link").toString());
         }
+        String title = remoteMessage.getNotification().getTitle();
         //Calling method to generate notification
-        sendNotification(remoteMessage.getNotification().getBody(),remoteMessage.getData());
+        sendNotification(remoteMessage.getNotification().getBody(),remoteMessage.getData(),title);
     }
 
     //This method is only generating push notification
     //It is same as we did in earlier posts
-    private void sendNotification(String messageBody,Map data) {
-        Intent intent = new Intent(this, tabbedMain.class);
+    private void sendNotification(String messageBody,Map data,String title) {
+        Intent intent = new Intent(this, DisplayNotificationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("title",title);
+        intent.putExtra("body",messageBody);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //        intent.putExtra("link",data.get("link").toString());
 //        intent.putExtra("Option",data.get("Option").toString());
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_krishna_round)
-
-                .setContentTitle("Hare Krishna")
+                .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
