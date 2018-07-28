@@ -53,11 +53,15 @@
         <activity android:name=".AdminNotifications" />
         <activity
             android:name=".DisplayNotificationActivity"
-            android:taskAffinity=""
-            android:launchMode="singleTask"
-            android:exported="true"
-            android:excludeFromRecents="true"
+            android:label="@string/title_activity_tabbed_main"
+            android:theme="@style/AppTheme.NoActionBar"
+
            />
     </application>
 
 </manifest>
+
+    <!--android:taskAffinity=""-->
+    <!--android:launchMode="singleTask"-->
+    <!--android:exported="true"-->
+    <!--android:excludeFromRecents="true"-->

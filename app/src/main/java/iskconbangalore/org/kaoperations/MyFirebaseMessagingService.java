@@ -45,8 +45,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     //This method is only generating push notification
     //It is same as we did in earlier posts
     private void sendNotification(String messageBody,Map data,String title) {
-        Intent intent = new Intent(this, DisplayNotificationActivity.class);
+        Intent intent = new Intent(this, tabbedMain.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         intent.putExtra("title",title);
         intent.putExtra("body",messageBody);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK

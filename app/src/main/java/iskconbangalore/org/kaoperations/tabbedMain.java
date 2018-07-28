@@ -50,16 +50,18 @@ public class tabbedMain extends AppCompatActivity {
 
         Intent i = getIntent();
 
-        if (i != null) {
-
-            String title = i.getStringExtra("title");
-            String body = i.getStringExtra("body");
-            Intent k = new Intent(getApplicationContext(), DisplayNotificationActivity.class);
-            k.putExtra("title", title);
-            k.putExtra("title", body);
-            startActivity(k);
-
-        }
+//        if (i != null) {
+//
+//            Log.d("info","TabbedMain Intent");
+//            Toast.makeText(this,"Tabbed Intent",Toast.LENGTH_LONG).show();
+//            String title = i.getStringExtra("title");
+//            String body = i.getStringExtra("body");
+//            Intent k = new Intent(getApplicationContext(), DisplayNotificationActivity.class);
+//            k.putExtra("title", title);
+//            k.putExtra("body", body);
+//            startActivity(k);
+//
+//        }
         startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()

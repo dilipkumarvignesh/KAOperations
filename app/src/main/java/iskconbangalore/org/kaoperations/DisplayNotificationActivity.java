@@ -16,7 +16,7 @@ public class DisplayNotificationActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         String title = intent.getStringExtra("title");
-        String body = intent.getStringExtra("body");
+        String body  = intent.getStringExtra("body");
 
         TextView TVnotificationTitle = findViewById(R.id.notificationTitle);
         TextView TVnotificationBody = findViewById(R.id.notificationBody);
