@@ -97,6 +97,10 @@ public class MenuFeedbackFragment extends Fragment implements DialogPrasadamUpda
                 {
                     String breakfast =  dataSnapshot.child(Meal).getValue().toString();
                     String[] Items = breakfast.split(",");
+
+                    for (int i = 0; i < Items.length; i++)
+                        Items[i] = Items[i].trim();
+                //    Log.d("info","Trimmed array"+trimmedArray);
                     ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
                             R.layout.menu_list, Items);
                     lView.setAdapter(adapter);

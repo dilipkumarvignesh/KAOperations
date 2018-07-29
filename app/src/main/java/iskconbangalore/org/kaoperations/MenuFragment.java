@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,24 +81,6 @@ public class MenuFragment extends Fragment {
             }
 
         });
-//        MenuUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent k = new Intent(getActivity(),MenuUpdate.class);
-//
-//                startActivity(k);
-//            }
-//        });
-
-//        Tbreakfast = view.findViewById(R.id.menu_breakfast);
-//        Tlunch = view.findViewById(R.id.menu_lunch);
-//        Tdinner = view.findViewById(R.id.menu_Dinner);
-//        root = FirebaseDatabase.getInstance().getReference();
-//        radioMenuGroup=(RadioGroup)findViewById(R.id.radioGroup);
-//        btnTest.setOnClickListener((view){
-//                Toast.makeText(getActivity(),"Testing",Toast.LENGTH_LONG).show();
-//
-//    });
 
         return view;
 
@@ -148,18 +129,19 @@ public class MenuFragment extends Fragment {
                     ArrayAdapter Breakfastadapter,Lunchadapter,Dinneradapter;
                     String[] BreakfastItems = breakfast.split(",");
 
+
                     ArrayList items = new ArrayList();
 
                     for (int i =0;i<BreakfastItems.length;i++)
                     {
-                        items.add(new ListCell(BreakfastItems[i], "Breakfast"));
+                        items.add(new ListCell(BreakfastItems[i].trim(), "Breakfast"));
                     }
                     
                     String[] LunchItems = Lunch.split(",");
 
                     for (int i =0;i<LunchItems.length;i++)
                     {
-                        items.add(new ListCell(LunchItems[i], "Lunch"));
+                        items.add(new ListCell(LunchItems[i].trim(), "Lunch"));
                     }
 //                     Lunchadapter = new ArrayAdapter<String>(getActivity(),
 //                            R.layout.menu_list, LunchItems);
@@ -168,7 +150,7 @@ public class MenuFragment extends Fragment {
 
                     for (int i =0;i<DinnerItems.length;i++)
                     {
-                        items.add(new ListCell(DinnerItems[i], "Dinner"));
+                        items.add(new ListCell(DinnerItems[i].trim(), "Dinner"));
                     }
 
                     items = sortAndAddSections(items);
@@ -176,22 +158,21 @@ public class MenuFragment extends Fragment {
                     ListAdapter adapter = new ListAdapter(getActivity(), items);
                     listBreakfast.setAdapter(adapter);
 
-//
-                    Log.d("info","Breakfast:"+breakfast);
-                    Log.d("info","Datasnapshot:"+dataSnapshot.getChildren());
-
-
-                    //progress.dismiss();
-                    // float AverageR = AverageRating/childCount;
 
                 }
                 else
                 {
-                    //Toast.makeText(MenuDisplay.this,"Menu Not Available",Toast.LENGTH_LONG).show();
-                    //progress.dismiss();
-//                    Tbreakfast.setText("NA");
-//                    Tlunch.setText("NA");
-//                    Tdinner.setText("NA");
+                    Toast.makeText(getActivity(),"Menu Not Available",Toast.LENGTH_LONG).show();
+                    ArrayList items = new ArrayList();
+
+                    items.add(new ListCell("NA", "Dinner"));
+                    items.add(new ListCell("NA", "Lunch"));
+                    items.add(new ListCell("NA", "Breakfast"));
+
+                    items = sortAndAddSections(items);
+                    ListAdapter adapter = new ListAdapter(getActivity(), items);
+                    listBreakfast.setAdapter(adapter);
+
                 }
             }
             @Override
@@ -208,9 +189,7 @@ public class MenuFragment extends Fragment {
 
         picker.show(getActivity().getFragmentManager(), "datePicker");
         picker.setCallBack(onDate);
-        Toast.makeText(getActivity(), "Set Date",
-                Toast.LENGTH_SHORT)
-                .show();
+
     }
 
 //    @Override
