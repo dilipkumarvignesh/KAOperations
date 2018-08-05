@@ -57,6 +57,7 @@
             android:theme="@style/AppTheme.NoActionBar"
 
            />
+        <activity android:name=".NotificationsActivity"></activity>
     </application>
 
 </manifest>
