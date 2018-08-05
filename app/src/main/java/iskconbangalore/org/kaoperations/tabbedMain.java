@@ -175,7 +175,9 @@ public class tabbedMain extends AppCompatActivity {
     }
 
 
-    public void submitFeedback(View view) {
-
+    public void clickNotification(View view) {
+        Intent k = new Intent(getApplicationContext(), NotificationsActivity.class);
+        //k.putExtra("name", name);
+        startActivity(k);
     }
 }
