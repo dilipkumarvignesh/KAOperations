@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -162,7 +161,7 @@ public class MenuFragment extends Fragment {
                 }
                 else
                 {
-                    Toast.makeText(getActivity(),"Menu Not Available",Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(getActivity(),"Menu Not Available",Toast.LENGTH_LONG).show();
                     ArrayList items = new ArrayList();
 
                     items.add(new ListCell("NA", "Dinner"));

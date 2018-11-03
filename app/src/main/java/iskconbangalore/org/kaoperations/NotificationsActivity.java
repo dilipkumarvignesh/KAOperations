@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class NotificationsActivity extends AppCompatActivity {
     private static RecyclerView.Adapter adapter;
@@ -54,9 +55,11 @@ public class NotificationsActivity extends AppCompatActivity {
                             snapshot.child("tmstmp").getValue().toString()
 
 
-                            ));
+                    ));
                 }
 
+
+                Collections.reverse(data);
                 adapter = new CustomAdapter(data);
                 recyclerView.setAdapter(adapter);
 

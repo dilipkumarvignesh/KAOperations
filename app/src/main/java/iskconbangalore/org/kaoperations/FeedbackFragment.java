@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -74,7 +73,7 @@ public class FeedbackFragment extends Fragment {
 
     public void goToFeedback()
     {
-        Toast.makeText(getActivity(),"Hello",Toast.LENGTH_LONG).show();
+      //  Toast.makeText(getActivity(),"Hello",Toast.LENGTH_LONG).show();
         Intent k = new Intent(getActivity(),FeedbackTab.class);
 
 

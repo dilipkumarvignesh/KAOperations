@@ -15,9 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Date;
 
 public class AdminNotifications extends AppCompatActivity {
     private EditText title,Body;
@@ -56,13 +56,11 @@ public class AdminNotifications extends AppCompatActivity {
                 Log.d("info", "dataSnapValue:" + dataSnapshot.getValue());
 
 
-
-                    String Date = UtilityFunctions.getDate();
-
                     Map<String,String> message = new HashMap<>();
                     message.put("name",titleContent);
                     message.put("text",BodyContent);
-                    message.put("tmstmp",new Date().toString());
+                    String timeStamp = new SimpleDateFormat("E, dd MMM yyyy HH:mm").format(new java.util.Date());
+                    message.put("tmstmp",timeStamp);
 
 
                     String key = root.child("messages").push().getKey();

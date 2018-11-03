@@ -100,8 +100,8 @@ public class MenuUpdate extends AppCompatActivity {
 
                 Log.d("info","dataSnapValue:"+dataSnapshot.getValue());
                 //    Log.d("info","Datasnapshot:"+dataSnapshot.getChildren());
-                if(!dataSnapshot.exists())
-                {
+//                if(!dataSnapshot.exists())
+//                {
                     String BreakfastMenu = Breakfast.getText().toString();
                     String LunchMenu = Lunch.getText().toString();
                     String DinnerMenu = Dinner.getText().toString();
@@ -124,11 +124,11 @@ public class MenuUpdate extends AppCompatActivity {
 
                     root.child("Menu").child(selectedDate.getText().toString()).child(MenuType).updateChildren(Menu_Updates);
                     Toast.makeText(con,"Menu Updated",Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    Toast.makeText(con,"Already updated for today",Toast.LENGTH_LONG).show();
-                }
+              //s  }
+//                else
+//                {
+//                    Toast.makeText(con,"Already updated for today",Toast.LENGTH_LONG).show();
+//                }
 
             }
 

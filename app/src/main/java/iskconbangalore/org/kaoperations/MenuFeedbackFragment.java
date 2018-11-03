@@ -74,7 +74,7 @@ public class MenuFeedbackFragment extends Fragment implements DialogPrasadamUpda
 //        Toast.makeText(getActivity(),"Hello",Toast.LENGTH_LONG).show();
 //    }
 
-    public void displayMenu(String SelectedDate,String MealType)
+    public void displayMenu(final String SelectedDate, String MealType)
     {
         final String Meal = MealType;
         Log.d("info","DBRef:"+FirebaseDatabase.getInstance().getReference("Menu"));
@@ -114,7 +114,7 @@ public class MenuFeedbackFragment extends Fragment implements DialogPrasadamUpda
                 }
                 else
                 {
-                    Toast.makeText(getActivity(),"Menu Not Available",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"Menu Not Available for "+SelectedDate,Toast.LENGTH_LONG).show();
                     progress.dismiss();
 
                 }

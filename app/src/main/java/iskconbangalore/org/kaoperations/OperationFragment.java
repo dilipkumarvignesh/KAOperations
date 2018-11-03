@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class OperationFragment extends Fragment {
     private static final String TAG ="Profile";
@@ -74,10 +73,10 @@ public class OperationFragment extends Fragment {
         return view;
     }
 
-    public void goToFeedback(View v)
-    {
-        Toast.makeText(getActivity(),"Hello",Toast.LENGTH_LONG).show();
-    }
+//    public void goToFeedback(View v)
+//    {
+//        Toast.makeText(getActivity(),"Hello",Toast.LENGTH_LONG).show();
+//    }
 
 
 }
